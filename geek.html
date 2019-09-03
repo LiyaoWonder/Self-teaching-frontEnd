@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>轮播组件</title>
+        <style media="screen">
+             .carousel {
+                margin: 30px auto;
+                max-width: 800px;
+            }
+
+            .carousel .panels {
+                position: relative;
+                height: 100%;
+                height: 400px;
+                /* 防止撑出来 */
+                overflow: hidden;
+            }
+
+            .carousel .panels > a {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                object-fit: cover;
+                display: inline-block;
+                transition: ease 0.5s;
+            }
+
+            .carousel .panels img {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="carousel">
+            <div class="panels">
+                <a href="#">
+                    <img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt="">
+                    <div class="text1">
+                        内容1
+                    </div>
+                </a>
+                <a href="#">
+                    <img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt="">
+                    <div class="text1">
+                        内容2
+                    </div>
+                </a>
+                <a href="#">
+                    <img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt="">
+                    <div class="text1">
+                        内容3
+                    </div>
+                </a>
+                <a href="#">
+                    <img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt="">
+                    <div class="text1">
+                        内容4
+                    </div>
+                </a>
+            </div>
+            <div class="action">
+                <div class="dots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+        </script>
+    </body>
+</html>

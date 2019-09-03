@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js" >
+
+        </script>
+    </head>
+    <body>
+        <div id="app">
+            <ul>
+                <li v-for="item in msg">{{ item }}</li>
+                <br>
+                <!-- 前面为值 后面为索引  -->
+                <li v-for="(item, index) in msg">{{ item }}---{{ index }}</li>
+                <br>
+                <li v-for="(value, key, index) of msgTwo">{{ key }}---{{ value }}---{{ index }}</li>
+            </ul>
+            <!-- 使用id 不要使用index -->
+            <div v-for="(item, index) of list" :key="index">
+                key: {{ item.id }}--index: {{ index }}--name: {{ item.name }}
+            </div>
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    // 数组的话有两个数据 index item
+                    msg: ['orange', 'banana', 'apple'],
+                    msgTwo: {a: "apple", b:"banana"},
+                    // 列表
+                    list: [
+                        // 插入元素会使得index变化
+                        {id: 1, name: "one",},
+                        {id: 2, name: "two",},
+                        {id: 5, name: "插队"},
+                        {id: 3, name: "three",},
+                        {id: 4, name: "four",},
+                    ]
+                },
+            })
+        </script>
+    </body>
+</html>

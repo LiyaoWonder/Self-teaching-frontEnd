@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto">
+</head>
+
+<body>
+    <div id="app">
+        <style media="screen" type="text/css" scoped>
+            .ui.segment.container {
+                width: 700px;
+            }
+
+            h1 {
+                font-family: 'Raleway', sans-serif;
+            }
+
+            p {
+                font-family: 'Raleway', sans-serif;
+                font-size:{{ article.fontSize }}px;
+            }
+
+            body {
+                background: black;
+                margin: 10px 0px 0px 0px;
+            }
+        </style>
+
+        <div class="ui segment padded container">
+            <h1 class="ui header">
+                Lorem ipsum
+            </h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis
+                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+
+        <div class="ui  segment padded container" >
+            <button v-on:click="article.fontSize+=5" class="ui top left attached label" type="button" name="button">
+                +
+            </button>
+            <h1 class="ui header">
+                {{ article.title }}
+                {{ article.fontSize }}
+            </h1>
+            <p v-bind:style="{ fontSize: article.fontSize + 'px' }">
+                {{ article.content }}
+            </p>
+        </div>
+
+        <!-- Comments & Form's here -->
+        <div class="ui segment container" style="width: 700px;">
+            <h3 class="ui header" style="font-family: 'Roboto'">Comments</h3>
+            <div v-for="comment in comments" class="ui comments">
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="http://semantic-ui.com/images/avatar/small/steve.jpg">
+                    </a>
+                    <div class="content">
+                        <a class="author">{{ comment.name }}</a>
+                        <div class="metadata">
+                            <div class="date">2 days ago</div>
+                        </div>
+                        <div class="text">
+                            {{ comment.said }}
+                        </div>
+                        <div class="actions">
+                            <a class="reply active">Reply</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="ui header" style="fontSize:14px;">Max Left Words: {{ 200 - message.length }} </h3>
+            <form class="ui replay form" method="post">
+                <textarea style="fontSize:20px;" rows="2" v-model="message" type="text">
+                <!-- <div v-model="message" class="field">
+                    <textarea></textarea>
+                </div> -->
+                <div class="ui primary submit labeled icon button">
+                    <i class="icon edit"></i> Add Reply
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // 创建 Vue 实例
+        var vm = new Vue({
+            // 管理区域
+            el: "#app",
+            // context
+            data: {
+                // Django context["article"] = article
+                article: {
+                    title: 'This is a title.',
+                    content: 'Hi there！',
+                    fontSize: 20,
+                },
+                comments:[
+                    {name:'Steve Jobs', said: 'Revolutionary!'},
+                    {name:'Wonder', said: 'Great!'},
+                    {name:'Rocky', said: 'Wow!'},
+                ],
+                message: '',
+                // style_p: {
+                //     'font-family': 'Raleway',
+                //     'font-size': article.fontSize + 'px',
+                // }
+            }
+        })
+    </script>
+</body>
+
+</html>

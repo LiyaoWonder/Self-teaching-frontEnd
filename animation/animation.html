@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            .ball {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+                background-color: lightblue;
+
+            }
+        </style>
+        <script type="text/javascript">
+            let log = console.log.bind(console)
+
+            class Timeline {
+                constructor() {
+                    this._animations = []
+                }
+
+                start() {
+                    let startTime = Date.now()
+                    setInterval(() => {
+                        // 加进来的 animation 遍历执行
+                         for(let animation of this._animations) {
+                             animation.tick(Date.now() - startTime)
+                         }
+                    }, 16)
+                }
+
+                pause() {
+
+                }
+
+                resume() {
+
+                }
+
+                set rate(value) {
+
+                }
+
+                get rate() {
+
+                }
+
+                addAnimation(animation) {
+                    this._animations.push(animation)
+                }
+
+                removeAnimation(animation) {
+
+                }
+            }
+
+            class AnimationElementStyle {
+                constructor(element, property, startTime, startValue, endTime, endvalue, convert) {
+
+                }
+
+                tick(t) {
+                    log('t')
+                    // element.style[property] = (t - startTime) / endTime
+
+                }
+            }
+
+            let timeLine = new Timeline()
+            timeLine.addAnimation(new AnimationElementStyle(
+                document.getElementById('ball'),
+                "transform",
+                0, 0,
+                500, 100,
+                (v) => `translateX(${v}px)`
+            ))
+
+            timeLine.start()
+
+        </script>
+    </head>
+    <body>
+        <div class="ball" id="ball">
+
+        </div>
+    </body>
+</html>

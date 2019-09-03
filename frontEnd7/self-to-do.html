@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>to-do</title>
+        <style media="screen">
+            .text-input {
+                color: black;
+            }
+            .done {
+                text-decoration: line-through;
+                background: lightblue;
+                color: grey;
+            }
+            .todo-content {
+                font-size: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="todo-form">
+            <input class="text-input" type="text" placeholder="请输入你想做的事:)">
+            <button class="button-add" type="button">Add</button>
+        </div>
+        <div class="todoContainer">
+            <div class="todo-cell">
+                <span class ="todo-content" contenteditable='true'>豆豆今天学编程</span>
+                <button class="todo-done" type="button" name="完成">我完成啦！</button>
+                <button class="todo-delete"type="button" name="button">不想再看见它啦！</button>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/Users/wonder/Documents/JavaScript/frontEnd7/self-to-do.js">
+    </script>
+</html>

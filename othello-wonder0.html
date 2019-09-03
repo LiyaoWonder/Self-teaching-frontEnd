@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>othello-wonder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="othello-wonder.js">
+    <style media="screen">
+        div .block {
+            width: 70px;
+            height: 70px;
+            background-color: lightgrey;
+            display: inline-block;
+            border: solid 1px white;
+            vertical-align: middle;
+        }
+
+        /* #container {
+                width: max-content;
+                height: max-content;
+            } */
+        div .blackChess {
+            width: 50px;
+            height: 50px;
+            border-radius: 40px;
+            background-color: black;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        div .whiteChess {
+            width: 50px;
+            height: 50px;
+            border-radius: 40px;
+            background-color: white;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style='width:100%;height:100%;display:flex;justify-content:center;align-items: center;'>
+        <div id="container"></div>
+    </div>
+    <script type="text/javascript">
+        // cosole
+        var log = function() {
+            console.log.apply(console, arguments)
+        }
+
+        chessBoardWidth = 8
+        chessBoardLength = 8
+        // 获取容器
+        var container = document.getElementById('container')
+
+        var color = 1
+
+        // 表示棋子位置
+        var map = [
+            [0, 0, 0, 0, 0, 0, 0, 0, ],
+            [0, 0, 0, 0, 0, 0, 0, 0, ],
+            [0, 0, 0, 0, 0, 0, 0, 0, ],
+            [0, 0, 0, 0, 0, 0, 0, 0, ],
+            [0, 0, 0, 0, 1, 2, 0, 0, ],
+            [0, 0, 0, 1, 2, 2, 0, 0, ],
+            [0, 0, 0, 0, 0, 0, 0, 2, ],
+            [0, 0, 0, 0, 0, 0, 2, 1, ],
+        ]
+        var render = function() {
+            // 清空container
+            container.innerHTML = ''
+            for (let y = 0; y < chessBoardWidth; y++) {
+                for (let x = 0; x < chessBoardLength; x++) {
+                    log('///')
+                    var element = document.createElement('div')
+                    element.className = 'block'
+                    container.appendChild(element)
+
+
+                    if (map[y][x] == 1) {
+                        var disc = document.createElement('div')
+                        disc.className = 'blackChess'
+                        element.appendChild(disc)
+                    }
+                    if (map[y][x] == 2) {
+                        var disc = document.createElement('div')
+                        disc.className = 'whiteChess'
+                        element.appendChild(disc)
+                    }
+
+                    var move = function(x, y, checkPass) {
+                        if (map[y][x] > 0) {
+                            return false
+                        }
+
+                        var orginX = x
+                        var orginY = y
+                        log(x, y)
+                        var canMove = false
+                        var oppositeChess = false
+                        var checkPass = false
+
+                        let directions = [
+                            [-1, -1],
+                            [0, -1],
+                            [1, -1],
+                            [1, 0],
+                            [1, 1],
+                            [0, 1],
+                            [-1, 1],
+                            [-1, 0],
+                        ]
+
+                        for (let i = 0; i < directions.length; i++) {
+                            let x = orginX
+                            let y = orginY
+                            // 递减应该放在 while TRUE 循环中
+                            while (true) {
+                                x -= directions[i][0]
+                                y -= directions[i][1]
+                                // 确定边界
+                                // 0-7 8个
+                                if (x < 0 || y < 0 || x > 7 || y > 7) {
+                                    canMove = false
+                                    break
+                                }
+                                if (map[y][x] == 3 - color) {
+                                    oppositeChess = true
+                                }
+                                if (map[y][x] == color && oppositeChess) {
+                                    // while (true) {
+                                    //     x += directions[i][0]
+                                    //     y += directions[i][1]
+                                    //     log('while', x, y)
+                                    //     map[y][x] = color
+                                    //     if (x == orginX && y == orginY) {
+                                    //         break
+                                    //     }
+                                    // }
+                                    canMove = true
+                                    break
+                                }
+                                if (map[y][x] == 0) {
+                                    canMove = false
+                                    break
+                                }
+                            }
+                            if (canMove && !checkPass) {
+                                while (true) {
+                                    x += directions[i][0]
+                                    y += directions[i][1]
+                                    log('while', x, y)
+                                    map[y][x] = color
+                                    // checkPass = true
+                                    if (x == orginX && y == orginY) {
+                                        break
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                    var check = function() {
+                        for (let y = 0; y < 8; y++) {
+                            for (let x = 0; x < 8; x++) {
+                                if (move(i, j, checkPass)) {
+                                    return false
+                                }
+                            }
+                        }
+                        return true
+                    }
+
+                    element.addEventListener('click', function(event) {
+                        if (move(x, y, false)) {
+                            color = 3 - color
+                            if (check()) {
+                                color = 3 - color;
+                                if (check()) {
+                                    console.log("Game Over");
+                                }
+                            }
+
+                        }
+
+                        // var orginX = x
+                        // var orginY = y
+                        // log(x, y)
+                        // var canMove = false
+                        // var oppositeChess = false
+                        // var checkPass = false
+
+                        // let directions = [
+                            [-1, -1],
+                            [0, -1],
+                            [1, -1],
+                            [1, 0],
+                            [1, 1],
+                            [0, 1],
+                            [-1, 1],
+                            [-1, 0],
+                        ]
+
+                        // for (let i = 0; i < directions.length; i++) {
+                            let x = orginX
+                            let y = orginY
+                            // 递减应该放在 while TRUE 循环中
+                            while (true) {
+                                x -= directions[i][0]
+                                y -= directions[i][1]
+                                // 确定边界
+                                // 0-7 8个
+                                if (x < 0 || y < 0 || x > 7 || y > 7) {
+                                    canMove = false
+                                    break
+                                }
+                                if (map[y][x] == 3 - color && !checkPass) {
+                                    oppositeChess = true
+                                }
+                                if (map[y][x] == color && oppositeChess) {
+                                    // while (true) {
+                                    //     x += directions[i][0]
+                                    //     y += directions[i][1]
+                                    //     log('while', x, y)
+                                    //     map[y][x] = color
+                                    //     if (x == orginX && y == orginY) {
+                                    //         break
+                                    //     }
+                                    // }
+                                    canMove = true
+                                    break
+                                }
+                                if (map[y][x] == 0) {
+                                    canMove = false
+                                    break
+                                }
+                            }
+                            if (canMove) {
+                                while (true) {
+                                    x += directions[i][0]
+                                    y += directions[i][1]
+                                    log('while', x, y)
+                                    map[y][x] = color
+                                    // checkPass = true
+                                    if (x == orginX && y == orginY) {
+                                        break
+                                    }
+                                }
+                            }
+
+                        }
+
+
+
+                        // 一个方向落子
+                        // while (x-- && x>=0) {
+                        //     if (map[y][x] == 2) {
+                        //         canMove = true
+                        //     } else if (map[y][x] == 1) {
+                        //         break
+                        //     } else if (map[y][x] == 0) {
+                        //         canMove = false
+                        //         break
+                        //     }
+                        // }
+                        // if (x < 0) {
+                        //     canMove = false
+                        // }
+                        // if (canMove) {
+                        //     while (x++ != orginX) {
+                        //         map[y][x] = 1
+                        //     }
+                        // }
+
+                        color = 3 - color
+
+                        render()
+                    })
+                }
+                container.appendChild(document.createElement('br'))
+            }
+        }
+
+        render()
+    </script>
+</body>
+
+</html>

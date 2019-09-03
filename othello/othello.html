@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>othello</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script type="text/javascript">
+
+    var log = function() {
+      console.log.apply(console, arguments)
+    }
+    // 制作一个棋盘
+    // 1代表黑子 2代表白子
+    var board = [
+      [0, 0, 0, 0, 0, 0, 0, 0, ],
+      [0, 0, 0, 0, 0, 0, 0, 0, ],
+      [0, 0, 0, 0, 0, 0, 0, 0, ],
+      [0, 0, 2, 2, 1, 0, 0, 0, ],
+      [1, 2, 2, 2, 2, 0, 0, 0, ],
+      [0, 0, 0, 0, 0, 0, 0, 0, ],
+      [0, 0, 0, 0, 0, 0, 0, 0, ],
+      [0, 0, 0, 0, 0, 0, 0, 0, ],
+    ]
+
+    let color = 1
+    var container = document.getElementById('container')
+    // 渲染页面
+    var render = function() {
+      // 清除 让div中的内容为空
+      container.innerHTML = ''
+      // 用let可以拿到x y的值
+      // let 胸怀小于 var
+      // 嵌套循环在于 乘法表 棋盘 重复中有重复
+      for (let y = 0; y < 8; y++) {
+        for (let x = 0; x < 8; x++) {
+          var element = document.createElement('div')
+          // 初始画布
+          element.style = 'width: 50px;\
+                            height: 50px;\
+                            background-color: darkgreen;\
+                            display: inline-block;\
+                            border: solid 1px white;\
+                            vertical-align: bottom;'
+          container.appendChild(element)
+          if (board[y][x] == 1) {
+            var disc = document.createElement('div')
+            disc.style =  'border-radius: 20px;\
+                           width: 40px;\
+                           height: 40px;\
+                           background-color: white;\
+                           margin-top: 5px;\
+                           margin-left: 5px;'
+            element.appendChild(disc)
+          }
+          if (board[y][x] == 2) {
+            var disc = document.createElement('div')
+            disc.style =  'border-radius: 20px;\
+                           width: 40px;\
+                           height: 40px;\
+                           background-color: black;\
+                           margin-top: 5px;\
+                           margin-left: 5px;'
+            element.appendChild(disc)
+          }
+          // 事件绑定
+          element.addEventListener('click', function(event) {
+            log(x, y)
+            let orginX = x
+            let orginY = y
+            // 如果是同色的就不吃子
+            var hasopposite = false
+            var canMove = false
+            // 横向吃子
+            // 从前往后找
+            while (x-- && x >= 0) {
+                // 如何去定位棋子 board[x][y]
+                if (board[y][x] == 3 - color) {
+                    hasopposite = true
+                    log('hasopposite = true')
+                }
+                if (board[y][x] == color && hasopposite == true) {
+                    canMove = true
+                    break
+                }
+            }
+            // 从后往前吃
+            if (canMove) {
+              while (x++ != orginX) {
+                board[y][x] = color
+              }
+              // 补充最后一粒黑子 ++x时需要 x++时候就可省
+              // board[y][x] = color
+              // 变色
+              color = 3 - color
+            }
+            render()
+          })
+        }
+        // 断行
+        container.appendChild(document.createElement('br'))
+      }
+    }
+
+    render()
+  </script>
+</body>
+
+</html>

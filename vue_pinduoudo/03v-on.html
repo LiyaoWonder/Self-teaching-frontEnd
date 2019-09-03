@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js" >
+
+        </script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="msg">
+            {{ msg }}
+            <br>
+            <button type="button" v-on:click='count += 1'>Add</button>
+            {{ count }}
+            <br>
+            <button type="button" @click='sub'>Sub</button>
+            {{ count }}
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    msg: "Hello, Vue",
+                    count: 1,
+                },
+                // 注意是 methods
+                methods: {
+                    // sub: function() {
+                    //
+                    // }
+                    sub() {
+                        this.count -= 1
+                    }
+                }
+            })
+            /*
+                @click.stop 组织单机事件冒泡
+                @submit.prevent 提交页面不再重载页面
+                @click.capture 添加事件监听器时使用事件捕获模式
+                @click.self 只有当单击事件是元素的自身事件时，才会触发
+                @click.once 只触发一次
+            */
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src=common_fuc.js></script>
+        <style>
+            .id-hide {
+                display: none;
+            }
+            .id-menu-content {
+                height: 100px;
+                border: 1px solid red;
+            }
+            body {
+                background: lightblue;
+            }
+            .class-item {
+                /* opacity: 0.6; */
+                display: inline-block;
+                filter: grayscale(70%);
+            }
+            /* 注意 下面选择器的优先级高于上面  */
+            .class-item.class-highlight {
+                /* opacity: 1; */
+                filter: initial;
+            }
+            .class-slide {
+                position: relative;
+                text-align: center;
+            }
+            .class-list img {
+                width: auto;
+                height: 300px;
+            }
+            .class-slide-img {
+                display: none;
+            }
+            .class-img-active {
+                display: inline-block;
+            }
+            button {
+                /* display 默认就是 inline-block  */
+                display: inline-block;
+                height: 30px;
+                width: 40px;
+            }
+            button.class-slide-button {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 204px;
+            }
+            .class-slide-indicators {
+                position: absolute;
+                bottom: 20px;
+            }
+            .class-slide-indi {
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: white;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 点击显示的菜单 -->
+        <!-- id-hide 隐藏 -->
+        <div class="wonder-1 id-hide">
+            <div class="id-menu">
+                <button type="button" class="id-menu-toggle">点击展开详情</button>
+                <div class="id-menu-content">
+                    详情
+                </div>
+            </div>
+            <div class="id-menu">
+                <button type="button" class="id-menu-toggle">点击展开详情</button>
+                <div class="id-menu-content">
+                    详情
+                </div>
+            </div>
+        </div>
+
+        <!-- 鼠标滑过高亮的菜单选择效果 -->
+        <div class="wonder-2 id-hide">
+            <div class="class-list">
+                <div class="class-item">
+                    <img src="1.jpg" alt="">
+                </div>
+                <div class="class-item">
+                    <img src="2.jpg" alt="">
+                </div>
+                <div class="class-item">
+                    <img src="3.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- 轮播图组件效果 -->
+        <div class="wonder-3">
+            <!-- data-imgs是图片的总数 data-active是当前显示的图片列表-->
+            <div class="class-slide" data-imgs=3 data-active=0>
+                <img id="id-imgs-0" class="class-slide-img class-img-active" src="slideimages/1.jpg">
+                <img id="id-imgs-1"class="class-slide-img" src="slideimages/2.jpg">
+                <img id="id-imgs-2"class="class-slide-img" src="slideimages/3.jpg">
+                <button class="class-slide-button" type="button" name="button">Next Page</button>
+                <button class="class-lastSlide-button" type="button" name="button">Last Page</button>
+                <div class="class-slide-indicators">
+                    <div class="class-slide-indi"></div>
+                    <div class="class-slide-indi"></div>
+                    <div class="class-slide-indi"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src=fe11.js></script>
+        <script src=fe11(2).js></script>
+        <script src=fe11(3).js></script>
+    </body>
+</html>

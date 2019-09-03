@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto">
+    <style media="screen" type="text/css">
+        .ui.segment.container {
+            width: 700px;
+        }
+
+        h1 {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        p {
+            font-family: 'Raleway', sans-serif;
+            font-size: 18px;
+        }
+
+        body {
+            background: black;
+            margin: 10px 0px 0px 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+   <div  id="app">
+
+    <div class="ui segment padded container">
+        <h1 class="ui header">
+            Lorem ipsum
+        </h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+    </div>
+
+    <div class="ui segment padded container">
+        <h1 class="ui header">
+            {{ article.title }}
+        </h1>
+        <p>
+            {{ article.content }}
+        </p>
+    </div>
+
+    <!-- Comments & Form's here -->
+    <div class="ui segment container" style="width: 700px;">
+        <h3 class="ui header" style="font-family: 'Roboto'">Comments</h3>
+        <div class="ui comments">
+            <div class="comment">
+                <a class="avatar">
+                    <img src="http://semantic-ui.com/images/avatar/small/steve.jpg">
+                </a>
+                <div class="content">
+                    <a class="author">Steve Jobes</a>
+                    <div class="metadata">
+                        <div class="date">2 days ago</div>
+                    </div>
+                    <div class="text">
+                        Revolutionary!
+                    </div>
+                    <div class="actions">
+                        <a class="reply active">Reply</a>
+                    </div>
+                    <form class="ui reply form">
+                        <div class="field">
+                            <textarea></textarea>
+                        </div>
+                        <div class="ui primary submit labeled icon button">
+                            <i class="icon edit"></i> Add Reply
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	</div>
+	 <script type="text/javascript">
+        var vm = new Vue({
+            // 管理区域
+            el: "#app",
+            // context
+            data: {
+                // Django context["article"] = article
+                 article: {
+                     title: 'This is a title.',
+                     content: 'Hi there！',
+                 };
+                 message;
+
+            }
+        })
+    </script>
+</body>
+
+</html>
